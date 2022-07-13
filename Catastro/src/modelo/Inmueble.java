@@ -2,14 +2,16 @@ package modelo;
 
 import java.util.Objects;
 
-public abstract class Inmueble { //no puedo crear objetos de clase inmueble
+public abstract class Inmueble  //no puedo crear objetos de clase inmueble
+	implements Comparable<Inmueble>{ //interfaz para comparar compareTo
+	
 	protected String ref;
 	protected double m2;
 	protected double valor;
 	protected String descripcion;
 	protected double preciom2;
-	public static final double coefUrbano=0.85;
-	public static final double coefRustico=0.45;
+	public static final double coefUrbano=0.0085;
+	public static final double coefRustico=0.0045;
 	
 	public Inmueble() {
 		this.ref=null;
@@ -110,7 +112,20 @@ public abstract class Inmueble { //no puedo crear objetos de clase inmueble
 		return Objects.equals(ref, other.ref);
 	}
 		
+	/*public Inmueble masSuperficie(Inmueble i) {
+		if (this.getM2()>i.getM2()) {
+			return this;
+		} else {
+			return i;
+		}
+	}*/
 	
+	@Override
+	public int compareTo(Inmueble o) {
+		return Double.compare(this.m2, o.m2);//devuelve -1 0(iguales) +1
+	}
 	
-	
+	public abstract double calculaIBI();
+		
+	public abstract double calculaPrecioVenta();
 }
